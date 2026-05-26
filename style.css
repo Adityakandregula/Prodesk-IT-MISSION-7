@@ -1,0 +1,359 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins', sans-serif;
+}
+
+
+/* ================= Navbar ================= */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 40px;
+position:sticky;
+top:0;
+background:rgba(255,255,255,0.8);
+backdrop-filter:blur(10px);
+box-shadow:0 4px 20px rgba(0,0,0,0.05);
+z-index:1000;
+}
+.logo{
+font-size:24px;
+font-weight:700;
+letter-spacing:1px;
+color:#1f2937;
+}
+
+.logo span{
+background: linear-gradient(90deg,#007bff,#00c6ff,#6a11cb);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+color: transparent;
+}
+
+.hero-title span{
+background: linear-gradient(90deg,#007bff,#00c6ff,#6a11cb,#ff6a00);
+background-clip: text;
+-webkit-background-clip: text;
+color: transparent;
+-webkit-text-fill-color: transparent;
+
+}
+
+.nav-links{
+display:flex;
+list-style:none;
+gap:35px;
+font-style: italic;
+
+}
+
+.nav-links a{
+text-decoration:none;
+font-weight:500;
+color:#374151;
+transition:0.3s;
+position:relative;
+padding:6px 12px;
+border-radius:6px;
+font-weight: 800;
+}
+
+
+/* Underline Animation (Only Menu Items) */
+
+.nav-links a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-4px;
+width:0%;
+height:2px;
+background:linear-gradient(90deg,#007bff,#00c6ff);
+transition:0.3s ease;
+}
+
+.nav-links a:hover::after{
+width:100%;
+}
+
+.nav-links a:hover{
+color:#007bff;
+transform:scale(0.95);
+}
+
+
+/* Dark Mode Navbar */
+
+.dark .navbar{
+background:rgba(15,23,42,0.8);
+}
+
+.dark .logo{
+color:white;
+}
+
+.dark .nav-links a{
+color:#cbd5e1;
+}
+
+
+/* ================= Hero ================= */
+
+.hero{
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.hero-title{
+font-size:56px;
+font-weight:800;
+letter-spacing:1px;
+color:#1f2937;
+margin-bottom:20px;
+line-height:1.2;
+}
+
+.hero-title span{
+background: linear-gradient(90deg,#007bff,#00c6ff,#6a11cb,#ff6a00);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+color: transparent;
+}
+.hero-subtitle{
+font-size:20px;
+color:#6b7280;
+max-width:650px;
+margin-bottom:30px;
+font-family: 'Times New Roman', Times, serif;
+color: black;
+font-size: 23px;
+font-weight: 800;
+}
+
+.dark .hero-title{
+color:white;
+}
+
+.dark .hero-subtitle{
+color:#cbd5e1;
+}
+
+
+/* ================= Button ================= */
+
+.btn{
+padding:14px 30px;
+border:none;
+border-radius:30px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+color:white;
+background:linear-gradient(90deg,#007bff,#00c6ff,#6a11cb);
+transition:0.4s;
+box-shadow:0 5px 15px rgba(0,123,255,0.3);
+}
+
+.btn:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 25px rgba(0,123,255,0.4);
+background:linear-gradient(90deg,#6a11cb,#00c6ff,#007bff);
+}
+
+
+/* ================= Services ================= */
+
+.services{
+padding:50px;
+text-align:center;
+}
+
+.service-container{
+display:flex;
+justify-content:center;
+gap:30px;
+margin-top:30px;
+flex-wrap:wrap;
+}
+
+.card{
+padding:30px;
+width:250px;
+box-shadow:5px 5px 15px rgba(0,0,0,0.20);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+
+/* ================= Footer ================= */
+
+footer{
+text-align:center;
+padding:20px;
+background:#f4f4f4;
+margin-top:30px;
+}
+
+
+/* ================= Dark Mode ================= */
+
+.dark{
+background:#121212;
+color:white;
+}
+
+.dark footer{
+background:#1e1e1e;
+}
+
+.dark .card{
+background:#1e1e1e;
+}
+
+
+/* ================= Toggle Switch ================= */
+
+.switch{
+position:relative;
+display:inline-block;
+width:50px;
+height:24px;
+}
+
+.switch input{
+opacity:0;
+width:0;
+height:0;
+}
+
+.slider{
+position:absolute;
+cursor:pointer;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:#ccc;
+transition:.4s;
+border-radius:34px;
+}
+
+.slider:before{
+position:absolute;
+content:"";
+height:18px;
+width:18px;
+left:3px;
+bottom:3px;
+background:white;
+transition:.4s;
+border-radius:50%;
+}
+
+input:checked + .slider{
+background:#2196F3;
+}
+
+input:checked + .slider:before{
+transform:translateX(26px);
+}
+
+
+/* Toggle Icon */
+
+.icon{
+position:absolute;
+top:4px;
+left:4px;
+font-size:12px;
+transition:0.4s;
+}
+
+input:checked + .slider .icon{
+left:30px;
+}
+
+
+/* ================= Right Section ================= */
+
+.right-section{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+
+/* ================= Hamburger Menu ================= */
+
+.menu-toggle{
+display:none;
+flex-direction:column;
+cursor:pointer;
+}
+
+.menu-toggle span{
+height:3px;
+width:25px;
+background:black;
+margin:4px 0;
+transition:0.3s;
+}
+
+.dark .menu-toggle span{
+background:white;
+}
+
+
+/* ================= Responsive ================= */
+
+@media(max-width:768px){
+
+.menu-toggle{
+display:flex;
+}
+
+.nav-links{
+position:absolute;
+top:70px;
+right:0;
+background:white;
+flex-direction:column;
+width:200px;
+text-align:center;
+padding:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+transform:translateX(100%);
+transition:0.3s;
+}
+
+.nav-links.active{
+transform:translateX(0);
+}
+
+.nav-links li{
+margin:15px 0;
+}
+
+.dark .nav-links{
+background:#1e1e1e;
+}
+
+.hero-title{
+font-size:32px;
+}
+
+}
