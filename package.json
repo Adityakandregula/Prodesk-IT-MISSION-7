@@ -3,17 +3,16 @@
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/yourusername/prodesk-it",
+  "homepage": "https://github.com/Adityakandregula/Prodesk-IT-MISSION-7",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/prodesk-it.git"
+    "url": "https://github.com/Adityakandregula/Prodesk-IT-MISSION-7.git"
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
