@@ -6,7 +6,7 @@ export function useDebouncedCallback<T extends (...args: any[]) => void>(cb: T, 
     cbRef.current = cb
   }, [cb])
 
-  const timeoutRef = useRef<number | undefined>()
+  const timeoutRef = useRef<number | undefined>(undefined)
 
   function callback(...args: Parameters<T>) {
     if (timeoutRef.current) window.clearTimeout(timeoutRef.current)
@@ -17,7 +17,7 @@ export function useDebouncedCallback<T extends (...args: any[]) => void>(cb: T, 
 
   useEffect(() => {
     return () => {
-      if (timeoutRef.current) window.clearTimeout(timeoutRef.current)
+      if (timeoutRef.current !== undefined) window.clearTimeout(timeoutRef.current)
     }
   }, [])
 
@@ -27,8 +27,8 @@ export function useDebouncedCallback<T extends (...args: any[]) => void>(cb: T, 
 export function debounce<T extends (...args: any[]) => void>(fn: T, wait = 500) {
   let t: number | undefined
   return (...args: Parameters<T>) => {
-    if (t) clearTimeout(t)
-    // @ts-ignore
+    if (t !== undefined) clearTimeout(t)
+    // @ts-ignore -- window.setTimeout returns number in browsers
     t = window.setTimeout(() => fn(...args), wait)
   }
 }
