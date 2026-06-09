@@ -21,6 +21,21 @@ export interface TMDBResponse {
 }
 
 async function fetchJson(url: string, opts: RequestInit = {}) {
+  // Safe debug: log the request URL with any api_key masked, and whether Bearer header is used
+  try {
+    const u = new URL(url)
+    const apikey = u.searchParams.get('api_key')
+    if (apikey) {
+      const last4 = apikey.slice(-4)
+      u.searchParams.set('api_key', `REDACTED***${last4}`)
+    }
+    const hasBearer = opts.headers && (opts.headers as Record<string,string>).Authorization
+    // eslint-disable-next-line no-console
+    console.debug('[tmdb] Request', u.toString(), hasBearer ? 'auth=Bearer' : apikey ? 'auth=api_key' : 'auth=none')
+  } catch (e) {
+    // ignore logging errors
+  }
+
   const res = await fetch(url, opts)
   if (!res.ok) {
     // try to parse JSON error from TMDB, fallback to text
