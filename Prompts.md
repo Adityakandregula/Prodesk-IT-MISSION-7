@@ -1,3 +1,15 @@
+## AI Prompts and Debugging Notes
+
+This file documents key AI prompts and debugging iterations used while building Cine-Stream.
+
+- Prompt: "Help implement an infinite scroll movie grid using TMDB API with intersection observer and debounced search. Return code in React + TypeScript suitable for Vite."
+  - Purpose: initial architecture and example patterns.
+  - Notes: All code was written, reviewed, and adapted by the engineer to ensure understanding and compliance with the 'Learn, Don't Copy' mandate.
+
+- Prompt: "How to save favorites to localStorage and sync with a /favorites route?"
+  - Purpose: design persisted favorites and removal flow.
+
+Keep this file updated with any AI prompts used for debugging or pair-programming.
 # Prompts.md - AI Implementation Documentation
 
 ## Sprint 07: Registration Wizard Module
