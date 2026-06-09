@@ -13,16 +13,16 @@ export default function MovieCard({
   const year = movie.release_date ? new Date(movie.release_date).getFullYear() : '—'
 
   return (
-    <div className="border rounded overflow-hidden">
+    <div className="card">
       {poster ? (
-        <img src={poster} alt={movie.title} loading="lazy" className="w-full h-64 object-cover" />
+        <img src={poster} alt={movie.title} loading="lazy" className="card-img" />
       ) : (
-        <div className="w-full h-64 bg-gray-100 flex items-center justify-center text-gray-500">No image</div>
+        <div className="card-img" style={{background: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af'}}>No image</div>
       )}
 
-      <div className="p-2">
-        <div className="text-sm font-medium truncate">{movie.title}</div>
-        <div className="text-xs muted mt-1">{year} · ⭐ {movie.vote_average ?? '—'}</div>
+      <div style={{padding: 8}}>
+        <div style={{fontSize: 14, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{movie.title}</div>
+        <div className="muted" style={{fontSize: 12, marginTop: 6}}>{year} · ⭐ {movie.vote_average ?? '—'}</div>
       </div>
     </div>
   )

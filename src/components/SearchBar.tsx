@@ -13,7 +13,7 @@ export default function SearchBar({ onSearch }: { onSearch: (q: string) => void 
   }
 
   return (
-    <div className="container">
+    <div className="search-center">
       <input
         aria-label="Search movies"
         className="w-full rounded border px-3 py-2"
