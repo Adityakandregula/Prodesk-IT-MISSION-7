@@ -23,8 +23,15 @@ export interface TMDBResponse {
 async function fetchJson(url: string, opts: RequestInit = {}) {
   const res = await fetch(url, opts)
   if (!res.ok) {
-    const text = await res.text().catch(() => '')
-    throw new Error(`${res.status} ${res.statusText} ${text}`)
+    // try to parse JSON error from TMDB, fallback to text
+    try {
+      const json = await res.json()
+      const msg = typeof json === 'object' && json !== null && 'status_message' in json ? (json as any).status_message : JSON.stringify(json)
+      throw new Error(`${res.status} ${res.statusText} — ${msg}`)
+    } catch (e) {
+      const text = await res.text().catch(() => '')
+      throw new Error(`${res.status} ${res.statusText} ${text}`)
+    }
   }
   return res.json()
 }
@@ -45,16 +52,18 @@ export async function fetchPopular(page = 1) {
     return emptyResponse(page)
   }
 
-  const url = `${TMDB_BASE}/movie/popular?language=en-US&page=${page}`
+  const url = new URL(`${TMDB_BASE}/movie/popular`)
+  url.searchParams.set('language', 'en-US')
+  url.searchParams.set('page', String(page))
+
   const opts: RequestInit = {}
-  if (BEARER) opts.headers = { Authorization: `Bearer ${BEARER}` }
-  else {
-    const q = `?api_key=${API_KEY}` // unused, keep for clarity
+  if (BEARER) {
+    opts.headers = { Authorization: `Bearer ${BEARER}` }
+  } else {
+    url.searchParams.set('api_key', API_KEY!)
   }
 
-  // if using api_key, append it to the url
-  const finalUrl = BEARER ? url : `${url.replace('?','&')}&api_key=${API_KEY}`.replace('&','?')
-  const data: TMDBResponse = await fetchJson(finalUrl, opts)
+  const data: TMDBResponse = await fetchJson(url.toString(), opts)
   return data
 }
 
@@ -65,11 +74,16 @@ export async function searchMovies(query: string, page = 1) {
     return emptyResponse(page)
   }
 
-  const url = `${TMDB_BASE}/search/movie?language=en-US&page=${page}&query=${encodeURIComponent(query)}`
+  const url = new URL(`${TMDB_BASE}/search/movie`)
+  url.searchParams.set('language', 'en-US')
+  url.searchParams.set('page', String(page))
+  url.searchParams.set('query', query)
+
   const opts: RequestInit = {}
   if (BEARER) opts.headers = { Authorization: `Bearer ${BEARER}` }
-  const finalUrl = BEARER ? url : `${url}&api_key=${API_KEY}`
-  const data: TMDBResponse = await fetchJson(finalUrl, opts)
+  else url.searchParams.set('api_key', API_KEY!)
+
+  const data: TMDBResponse = await fetchJson(url.toString(), opts)
   return data
 }
 
