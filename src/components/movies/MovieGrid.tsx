@@ -83,28 +83,22 @@ export default function MovieGrid({ query }: { query: string }) {
   const favorites = getFavorites()
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+    <div className="container">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {movies.map(m => (
           <MovieCard key={m.id} movie={m} isFavorite={favorites.includes(m.id)} onToggleFavorite={toggleFavorite} />
         ))}
       </div>
 
       {!loading && movies.length === 0 && (
-        <div className="py-12 text-center text-slate-600">No results found.</div>
+        <div className="py-8 text-center muted">No results found.</div>
       )}
 
-      {error && <div className="text-red-500 mt-4">{error}</div>}
+      {error && <div className="text-red-600 mt-4">{error}</div>}
 
-      <div className="py-6 text-center">
-        {loading ? (
-          <div className="text-sm text-slate-500">Loading…</div>
-        ) : (
-          <div className="text-xs text-slate-400">Scroll to load more</div>
-        )}
-      </div>
+      <div className="py-6 text-center muted">{loading ? 'Loading…' : ''}</div>
 
-      <div ref={sentinelRef} style={{ height: 24 }} />
+      <div ref={sentinelRef} style={{ height: 16 }} />
     </div>
   )
 }
