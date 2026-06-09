@@ -5,12 +5,18 @@ import SearchBar from './components/SearchBar'
 import MovieGrid from './components/movies/MovieGrid'
 import Favorites from './pages/Favorites'
 import { useState } from 'react'
+import { HAS_API_KEY } from './services/tmdb'
 
 function Home() {
   const [query, setQuery] = useState('')
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       <Header />
+      {!HAS_API_KEY && (
+        <div className="bg-yellow-50 border-l-4 border-yellow-300 text-yellow-800 p-3 text-sm max-w-7xl mx-auto px-4">
+          TMDB API key is missing. Set `VITE_TMDB_KEY` in your local `.env` or in your deployment environment.
+        </div>
+      )}
       <main className="py-6">
         <div className="max-w-7xl mx-auto px-4">
           <SearchBar onSearch={setQuery} />

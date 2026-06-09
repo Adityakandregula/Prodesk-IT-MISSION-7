@@ -1,5 +1,6 @@
 export const TMDB_BASE = 'https://api.themoviedb.org/3'
 const API_KEY = import.meta.env.VITE_TMDB_KEY
+export const HAS_API_KEY = Boolean(API_KEY)
 
 export interface Movie {
   id: number
